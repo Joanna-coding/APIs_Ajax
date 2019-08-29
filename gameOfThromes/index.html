@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>How to use API search the Weather</title>
+        <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+        <script>
+            $(document).ready(function() {
+                    $("img").click(function(){
+                            // var url = "https://anapioficeandfire.com/api/houses/";
+                            // var urlHouseId = $(this).attr("id");
+                            // var urlRequest = url + urlHouseId;  
+
+                            var urlRequest = "https://anapioficeandfire.com/api/houses/" +$(this).attr("id"); 
+                            
+                            $.get(urlRequest, function(dataHouse){
+                                var name = dataHouse["name"];
+                                var words = dataHouse["words"];
+                                var titles = dataHouse["titles"];
+                                console.log(name);
+                                console.log(words);
+                                console.log(titles);
+                                $("#info").html("Name: " + name);
+                                $("#info").html("Words: " + words);
+                                $("#info").html("Titles: " + titles);
+                            }, "json");
+                       
+                    });
+            });
+           
+        </script>
+        <style>
+            .wrapper{
+                width: 800px;
+                text-align: center;
+            }
+
+            #selfie{
+                width: 780px;
+                height: 240px;
+                margin: 10px;
+                display: inline-flex;
+            }
+
+            #selfie img{
+                width: 200px;
+                height: 200px;
+                display: inline-block;
+                margin: 3px;
+            
+
+            }
+
+            #info{
+                width: 600px;
+                height: 300px;
+                border:1px solid black;
+                background-color: lightgray;
+                position: relative;
+                left: 80px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="selfie">
+                    <img id="17" src="baratheon.png" alt="">
+                    <img id="229" src="lannister.jpg" alt="">
+                    <img id="362" src="stark.jpg" alt="">
+                    <img id="378" src="targaryen.jpg" alt="">
+            </div>
+
+
+            <div id="info"></div>
+        </div>
+        
+    </body>
+</html>
+
+

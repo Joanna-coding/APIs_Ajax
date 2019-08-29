@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>How to use API search the Weather</title>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+              $('form').submit(function() {
+                   
+                    var $input = $('#myform :input');
+                        console.log($input)
+                        var values={};
+                        $input.each(function(){
+                            values[this.name] = $(this).val();
+                            
+                    })
+
+                    console.log(values)
+                    var searchName = values.search;
+                    console.log(searchName)
+
+                    var url = "http://api.openweathermap.org/data/2.5/weather?q="+ searchName +"&&appid=f83fa28c9dca41604aad53a9f4c5cf70";
+                    $.get(url, function(res) {
+                        console.log(res)
+
+                        var number = res.main.humidity;
+                        $("p").html('<h2>'+ searchName+'</h2> ')
+                        $("p").append('<h2>Temperature: '+ number+'</h2> ')
+
+                    }, 'json');
+                   
+                    return false;
+                });
+            });
+        </script>
+        <style>
+            .wrapper form{
+                height: 100px;
+                width: 300px;
+                text-align: center;
+                margin: 30px;
+                
+            }
+
+            input{
+                position: relative;
+                top:30px;
+            }
+
+        
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <form id="myform" action="">
+                <input type="text" name="search">
+            
+                <input type="submit" value="Search Weather">
+                
+             </form>
+             <p id="asdf"></p>
+        </div>
+        
+    </body>
+</html>
